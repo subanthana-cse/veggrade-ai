@@ -1,32 +1,99 @@
-# React + TypeScript + Vite
+# 🥬 VegGrade AI
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+**Multi-Vegetable Quality Assessment & Grading System**
+Smart India Hackathon project
 
-Currently, two official plugins are available:
+AI-powered quality grading for 11 vegetables: onion, tomato, potato, carrot, brinjal, cabbage, cauliflower, chilli, capsicum, cucumber and garlic.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 🎯 Problem Statement
 
-## React Compiler
+Vegetable quality assessment (originally onion grading) is subjective and inconsistent across inspectors. VegGrade AI provides objective, vegetable-specific quality grading using computer vision.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## ✨ Features
 
-## Expanding the Oxlint configuration
+- Image upload and camera capture
+- Vegetable identification
+- Multiple vegetable detection in one image
+- Freshness, damage and rotten/defective detection
+- Ripeness assessment where applicable
+- Quality score from 0 to 100
+- Grade A / B / C / Reject
+- Vegetable-specific assessment criteria
+- Batch analysis with statistics
+- Analysis history
+- Dashboard with charts
+- Responsive mobile and desktop UI
 
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
+## 🛠️ Tech Stack
 
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
+| Layer | Technology |
+|---|---|
+| Frontend | React, TypeScript, Tailwind CSS, Recharts, React Router |
+| Backend | Python, FastAPI |
+| AI layer | Mock analyzer (ready for YOLO / TensorFlow / PyTorch) |
+
+## 📁 Project Structure
+
+```
+veggrade-ai/
+├── backend/
+│   ├── main.py              # FastAPI server (run_model = AI layer)
+│   └── requirements.txt
+├── src/
+│   ├── components/          # Layout, reusable UI
+│   ├── context/             # History state
+│   ├── data/                # Vegetable data
+│   ├── pages/               # Home, Scanner, Result, Batch, History, Dashboard, About
+│   ├── services/            # aiService.ts (API + mock fallback)
+│   └── types/
+├── package.json
+└── README.md
 ```
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+## 🚀 Run Locally
+
+### 1. Frontend
+
+```bash
+npm install
+npm run dev
+```
+
+Open http://localhost:5173
+
+### 2. Backend
+
+```bash
+cd backend
+python -m venv venv
+venv\Scripts\activate
+pip install -r requirements.txt
+uvicorn main:app --reload --port 8000
+```
+
+API docs: http://localhost:8000/docs
+
+> If the backend is off, the frontend automatically falls back to mock data.
+
+## 🤖 About the AI
+
+This version uses **realistic mock AI data**. The AI service layer is separated so a real model can replace it with no UI changes:
+
+- Frontend: `src/services/aiService.ts` (`VegetableAnalyzer` interface)
+- Backend: `backend/main.py` (`run_model()` function)
+
+Planned: YOLO-based detection, per-vegetable defect classifier, real freshness and ripeness scoring.
+
+## 📸 Pages
+
+1. Home
+2. AI Vegetable Scanner
+3. Quality Analysis Result
+4. Batch Analysis
+5. Analysis History
+6. Dashboard
+7. About
+
+## 👩‍💻 Author
+
+subanthana-cse
